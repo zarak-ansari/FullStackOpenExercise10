@@ -1,4 +1,5 @@
-import { Text, View } from "react-native"
+import { View } from "react-native"
+import Text from "./Text"
 
 const RepositoryItem = props => {
     const repository = props.repository
@@ -16,13 +17,3 @@ const RepositoryItem = props => {
 }
 
 export default RepositoryItem
-
-// id: 'reduxjs.redux',
-// fullName: 'reduxjs/redux',
-// description: 'Predictable state container for JavaScript apps',
-// language: 'TypeScript',
-// forksCount: 13902,
-// stargazersCount: 52869,
-// ratingAverage: 0,
-// reviewCount: 0,
-// ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
