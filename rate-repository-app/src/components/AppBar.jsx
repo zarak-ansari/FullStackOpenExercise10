@@ -6,14 +6,17 @@ import theme from '../themes';
 const styles = StyleSheet.create({
     container: {
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: theme.colors.darkBackground
+        backgroundColor: theme.colors.darkBackground,
     },
+    button: {
+        margin: 10
+    }
 });
 
 const AppBar = () => {
     return (
         <View style={styles.container}>
-            <Pressable><SubHeading color="textSecondary">Repositories</SubHeading></Pressable>
+            <Pressable style={styles.button}><SubHeading color="textSecondary">Repositories</SubHeading></Pressable>
         </View>
     );
 };

@@ -1,10 +1,12 @@
-import { Text, View, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 import Header from "./Header"
 import LanguageTag from "./LanguageTag";
+import Footer from "./Footer";
 
 const cardStyles = StyleSheet.create({
     container: {
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      padding: 20
     },
 });
 
@@ -14,12 +16,12 @@ const RepositoryItem = props => {
         <View style={cardStyles.container}>
             <Header name={repository.fullName} avatarImage={repository.ownerAvatarUrl} description={repository.description}/>
             <LanguageTag languageName={repository.language} />
-            <View>
-                <Text>Forks: {repository.forksCount}</Text>
-                <Text>Stars: {repository.stargazersCount}</Text>
-                <Text>Reviews: {repository.reviewCount}</Text>
-                <Text>Rating: {repository.ratingAverage}</Text>
-            </View>
+            <Footer 
+                forksCount={repository.forksCount}
+                stargazersCount={repository.stargazersCount}
+                reviewCount={repository.reviewCount}
+                ratingAverage={repository.ratingAverage} 
+            />
         </View>
     )
 }

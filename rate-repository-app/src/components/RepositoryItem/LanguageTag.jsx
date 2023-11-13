@@ -1,14 +1,16 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
+import Text from "../Text"
 
 const styles = StyleSheet.create({
     container:{
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 0,
+        marginBottom: 0,
+        marginLeft: 60,
         alignItems: 'flex-start',
     },
     text: {
         flexGrow: 0,
-        padding: 5,
+        padding: 2,
         borderRadius: 5,
         backgroundColor: '#0366d6',
         color: '#fff',

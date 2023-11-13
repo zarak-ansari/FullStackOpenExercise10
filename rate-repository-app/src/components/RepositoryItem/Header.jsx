@@ -1,4 +1,5 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
+import Text from "../Text";
 
 const headerStyles = StyleSheet.create({
     container: {
@@ -27,7 +28,7 @@ const Header = ({ avatarImage, name, description }) =>{
                 <Avatar imageUrl={avatarImage} />
             </View>
             <View style={headerStyles.infoContainer}>
-                <Text>{name}</Text>
+                <Text fontWeight='bold'>{name}</Text>
                 <Text>{description}</Text>
             </View>
         </View>
