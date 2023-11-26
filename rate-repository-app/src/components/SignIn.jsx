@@ -5,6 +5,7 @@ import Text from './Text';
 import theme from '../themes';
 import * as yup from 'yup';
 import useSignIn from '../hooks/useSignIn';
+import { useNavigate } from 'react-router-native';
 
 const initialValues = {
   username: '',
@@ -20,45 +21,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     margin: 20,
     maxWidth: 60,
-    borderRadius:5,
+    borderRadius: 5,
     alignItems: 'center',
   }
 })
 
 const validationSchema = yup.object().shape({
   username: yup
-              .string()
-              .required(),
+    .string()
+    .required(),
   password: yup
-              .string()
-              .required()
+    .string()
+    .required()
 })
 
 const SignIn = () => {
-  
+
   const [signIn] = useSignIn()
+  const navigate = useNavigate()
 
   const onSubmit = async (values) => {
-    try{
-      const result = await signIn(values)
-      console.log(JSON.stringify(result.data.authenticate.accessToken))
+    try {
+      await signIn(values)
+      navigate('/')
     } catch (e) {
       console.log(e)
     }
   }
 
   return (
-    <Formik 
+    <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit}/>}
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
 };
 
-const SignInForm = ({onSubmit}) => {
+const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.formContainer} >
       <FormikTextInput name='username' placeholder='Username' />
