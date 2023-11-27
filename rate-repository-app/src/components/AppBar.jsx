@@ -4,6 +4,8 @@ import SubHeading from './SubHeading';
 import theme from '../themes';
 import { Link } from 'react-router-native';
 import { ScrollView } from 'react-native';
+import { GET_USERNAME } from '../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 const styles = StyleSheet.create({
     container: {
@@ -16,12 +18,19 @@ const styles = StyleSheet.create({
     }
 });
 
+
 const AppBar = () => {
+    const { data, error, loading } = useQuery(GET_USERNAME)
+    
+    if(error) return null
+    if(loading) return null
+
     return (
         <View style={styles.container}>
             <ScrollView horizontal>
                 <AppBarButton name='Repositories' path='/' />
-                <AppBarButton name='Sign In' path='/signin'/>
+                { !data.me && <AppBarButton name='Sign In' path='/signin'/> }
+                { data.me && <AppBarButton name='Sign Out' path='/signout' /> }
             </ScrollView>
         </View>
     );

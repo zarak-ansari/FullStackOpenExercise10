@@ -17,3 +17,12 @@ mutation ($username: String!, $password: String!){
   }
 }
 `
+
+export const GET_USERNAME = gql`
+query Username {
+  me {
+    id
+    username
+  }
+}
+`
