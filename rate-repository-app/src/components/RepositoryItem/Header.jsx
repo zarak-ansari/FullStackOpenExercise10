@@ -28,8 +28,8 @@ const Header = ({ avatarImage, name, description }) =>{
                 <Avatar imageUrl={avatarImage} />
             </View>
             <View style={headerStyles.infoContainer}>
-                <Text fontWeight='bold'>{name}</Text>
-                <Text>{description}</Text>
+                <Text fontWeight='bold' testID='fullName'>{name}</Text>
+                <Text testID='description'>{description}</Text>
             </View>
         </View>
     )

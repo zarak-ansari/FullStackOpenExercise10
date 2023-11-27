@@ -13,7 +13,7 @@ const cardStyles = StyleSheet.create({
 const RepositoryItem = props => {
     const repository = props.repository
     return (
-        <View style={cardStyles.container}>
+        <View style={cardStyles.container} testID="repositoryItem">
             <Header name={repository.fullName} avatarImage={repository.ownerAvatarUrl} description={repository.description}/>
             <LanguageTag languageName={repository.language} />
             <Footer 
@@ -27,4 +27,3 @@ const RepositoryItem = props => {
 }
 
 export default RepositoryItem
-

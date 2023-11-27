@@ -18,10 +18,10 @@ const styles = {
 const Footer = ({ forksCount, stargazersCount, reviewCount, ratingAverage }) => {
     return (
         <View style={styles.container}>
-            <FooterItem name='Forks' value={forksCount} />
-            <FooterItem name='Stars' value={stargazersCount} />
-            <FooterItem name='Reviews' value={reviewCount} />
-            <FooterItem name='Rating' value={ratingAverage}/>
+            <FooterItem testID='forksCount' name='Forks' value={forksCount} />
+            <FooterItem testID='stargazersCount' name='Stars' value={stargazersCount} />
+            <FooterItem testID='reviewCount' name='Reviews' value={reviewCount} />
+            <FooterItem testID='ratingAverage' name='Rating' value={ratingAverage}/>
         </View>
     )
 }
