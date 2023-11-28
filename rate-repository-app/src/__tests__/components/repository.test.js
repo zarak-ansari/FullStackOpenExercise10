@@ -53,11 +53,12 @@ describe('RepositoryList', () => {
         const repositoryItems = screen.getAllByTestId('repositoryItem')
         expect(repositoryItems).toBeDefined()
         expect(repositoryItems).toHaveLength(2)
-
+        
+        // assumes that repositories will appear in the same order as they do in the data passed in
+        // may need refactoring
         for(let i=0; i<repositories.length; i++){
             const displayedRepository = repositoryItems[i]
             const {fullName, description, language, forksCount, stargazersCount, ratingAverage, reviewCount} = repositories.edges[i].node
-
 
             expect(within(displayedRepository).getByText(fullName)).toBeDefined()
             expect(within(displayedRepository).getByText(description)).toBeDefined()
