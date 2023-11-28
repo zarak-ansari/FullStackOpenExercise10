@@ -2,6 +2,7 @@ import { View, StyleSheet } from "react-native"
 import Header from "./Header"
 import LanguageTag from "./LanguageTag";
 import Footer from "./Footer";
+import GitHubLinkButton from "./GitHubLinkButton";
 
 const cardStyles = StyleSheet.create({
     container: {
@@ -22,6 +23,7 @@ const RepositoryItem = props => {
                 reviewCount={repository.reviewCount}
                 ratingAverage={repository.ratingAverage} 
             />
+            {props.showGithubLink && <GitHubLinkButton url={repository.url} />}
         </View>
     )
 }

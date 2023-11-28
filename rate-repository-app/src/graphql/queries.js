@@ -26,3 +26,21 @@ query Username {
   }
 }
 `
+
+export const GET_REPOSITORY_BY_ID = gql`
+query Repository($repositoryId: ID!) {
+  repository(id: $repositoryId) {
+    id
+    fullName
+    url
+    reviewCount
+    stargazersCount
+    forksCount
+    language
+    ratingAverage
+    ownerAvatarUrl
+    description
+    ownerName
+  }
+}
+`

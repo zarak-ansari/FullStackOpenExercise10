@@ -5,6 +5,7 @@ export const REPOSITORY_DETAILS = gql`
 fragment RepositoryDetails on RepositoryConnection {
     edges {
         node {
+            id
             fullName
             description
             language
