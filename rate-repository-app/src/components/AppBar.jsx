@@ -29,6 +29,7 @@ const AppBar = () => {
         <View style={styles.container}>
             <ScrollView horizontal>
                 <AppBarButton name='Repositories' path='/' />
+                <AppBarButton name='Create a Review' path='/createreview' />
                 { !data.me && <AppBarButton name='Sign In' path='/signin'/> }
                 { data.me && <AppBarButton name='Sign Out' path='/signout' /> }
             </ScrollView>
