@@ -6,7 +6,8 @@ import theme from "../../themes"
 const styles = StyleSheet.create({
     mainContainer:{
         flexDirection: 'row',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        padding: 10
     },
     ratingColumn:{
         flexDirection: 'column',
@@ -26,6 +27,10 @@ const styles = StyleSheet.create({
     },
     infoContainer:{
         flexDirection: 'column'
+    },
+    reviewTextContainer: {
+        marginTop: 5,
+        width: 300
     }
 })
 
@@ -45,9 +50,9 @@ const ReviewItem = ({ review }) => {
 const ReviewInfo = (props) => {
     return(
         <View style={styles.infoContainer}>
-            <Text>{props.username}</Text>
+            <Text fontWeight='bold'>{props.username}</Text>
             <Text>{formatDate(props.date)}</Text>
-            <Text>{props.text}</Text>
+            <View style={styles.reviewTextContainer}><Text>{props.text}</Text></View>
         </View>
     )
 }
@@ -61,7 +66,7 @@ const Rating = ({ rating }) => {
     return(
         <View>
             <View style={styles.ratingContainer}>
-                <Text>{rating}</Text>
+                <Text color='primary' fontWeight='bold'>{rating}</Text>
             </View>
         </View>
     )
