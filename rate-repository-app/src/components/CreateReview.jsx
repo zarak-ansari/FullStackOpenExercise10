@@ -4,14 +4,13 @@ import FormikTextInput from './FormikHelpers/FormikTextInput';
 import Text from './Text';
 import theme from '../themes';
 import * as yup from 'yup';
-// import useSignIn from '../hooks/useSignIn';
-// import { useNavigate } from 'react-router-native';
+import useCreateReview from '../hooks/useCreateReview';
 
 const initialValues = {
-  repositoryOwnerName: '',
+  ownerName: '',
   repositoryName: '',
   rating: '',
-  reviewText: ''
+  text: ''
 }
 
 const styles = StyleSheet.create({
@@ -30,33 +29,32 @@ const styles = StyleSheet.create({
 })
 
 const validationSchema = yup.object().shape({
-    repositoryOwnerName: yup
+    ownerName: yup
         .string()
-        .required(),
+        .required('Repository owner name is required'),
     repositoryName: yup
         .string()
-        .required(),
+        .required('Repository name is required'),
     rating: yup
         .number()
-        .min(0)
-        .max(100)
-        .required(),
-    reviewText: yup
+        .min(0, 'Rating cannot be negative')
+        .max(100, 'Rating must be 100 or below')
+        .required('Rating must be provided'),
+    text: yup
         .string()
 })
 
 const CreateReview = () => {
 
-//   const [signIn] = useSignIn()
-//   const navigate = useNavigate()
+const [createReview] = useCreateReview()
 
   const onSubmit = async (values) => {
-    // try {
-    //   await signIn(values)
-    //   navigate('/')
-    // } catch (e) {
-    //   console.log(e)
-    // }
+    try {
+      values = {...values, rating:parseInt(values.rating)}
+      await createReview(values)
+    } catch (e) {
+      console.log(e)
+    }
     console.log(JSON.stringify(values))
   }
 
@@ -74,10 +72,10 @@ const CreateReview = () => {
 const CreateReviewForm = ({ onSubmit }) => {
   return (
     <View style={styles.formContainer} >
-      <FormikTextInput name='repositoryOwnerName' placeholder='Repository Owner' />
+      <FormikTextInput name='ownerName' placeholder='Repository Owner' />
       <FormikTextInput name='repositoryName' placeholder='Repository Name' />
       <FormikTextInput name='rating' placeholder='Rating from 0 to 100' />
-      <FormikTextInput name='reviewText' placeholder='Review' multiline={true} />
+      <FormikTextInput name='text' placeholder='Review' multiline={true} />
       
       <Pressable onPress={onSubmit} style={styles.button}><Text color='white' fontWeight='bold'>Create a Review</Text></Pressable>
     </View>
