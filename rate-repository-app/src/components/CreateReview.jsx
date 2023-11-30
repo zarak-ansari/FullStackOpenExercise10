@@ -55,7 +55,7 @@ const [createReview] = useCreateReview()
     } catch (e) {
       console.log(e)
     }
-    console.log(JSON.stringify(values))
+
   }
 
   return (
