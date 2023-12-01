@@ -4,7 +4,7 @@ import SubHeading from './SubHeading';
 import theme from '../themes';
 import { Link } from 'react-router-native';
 import { ScrollView } from 'react-native';
-import { GET_USERNAME } from '../graphql/queries';
+import { GET_USER } from '../graphql/queries';
 import { useQuery } from '@apollo/client';
 
 const styles = StyleSheet.create({
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 
 const AppBar = () => {
-    const { data, error, loading } = useQuery(GET_USERNAME)
+    const { data, error, loading } = useQuery(GET_USER)
     
     if(error) return null
     if(loading) return null
@@ -32,6 +32,7 @@ const AppBar = () => {
                 { !data.me && <AppBarButton name='Sign In' path='/signin'/> }
                 { !data.me && <AppBarButton name='Sign Up' path='/signup'/> }
                 { data.me && <AppBarButton name='Create a Review' path='/createreview' />}
+                { data.me && <AppBarButton name='My Reviews' path='/myreviews' />}
                 { data.me && <AppBarButton name='Sign Out' path='/signout' /> }
             </ScrollView>
         </View>

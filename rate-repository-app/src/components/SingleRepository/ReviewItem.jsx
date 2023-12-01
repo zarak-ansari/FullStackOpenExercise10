@@ -1,7 +1,9 @@
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, Pressable } from "react-native"
 import { format, parseISO } from "date-fns"
 import Text from "../Text"
 import theme from "../../themes"
+import { useNavigate } from "react-router-native"
+import useDeleteReview from "../../hooks/useDeleteReview"
 
 const styles = StyleSheet.create({
     mainContainer:{
@@ -31,26 +33,62 @@ const styles = StyleSheet.create({
     reviewTextContainer: {
         marginTop: 5,
         width: 300
-    }
+    },
+    button:{
+        margin:5,
+        padding:10,
+        color:'white',
+        backgroundColor:'blue',
+        borderRadius: 5
+    },
 })
 
 const ReviewItem = ({ review }) => {
+    const onUserReviewPage = review.user === undefined 
+
     return(
-        <View style={styles.mainContainer}>
-            <Rating rating={review.rating}/>
-            <ReviewInfo 
-                username={review.user.username}
-                date={review.createdAt}
-                text={review.text}
-            />
+        <View>
+            <View style={styles.mainContainer}>
+                <Rating rating={review.rating}/>
+                <ReviewInfo 
+                    heading={onUserReviewPage ? review.repository.fullName : review.user.username}
+                    date={review.createdAt}
+                    text={review.text}
+                />
+            </View>
+            {onUserReviewPage && <Buttons repositoryId={review.repository.id} reviewId={review.id} />}
         </View>
     )
 }
 
+const Buttons = ({ repositoryId, reviewId }) => {
+    const navigate = useNavigate()
+    
+    const [deleteReview] = useDeleteReview()
+
+    return(
+        <View style={styles.mainContainer}>
+            <Pressable 
+                style={styles.button}
+                onPress={() => navigate(`/repository/${repositoryId}`)}
+            >
+                <Text color='white' fontWeight='bold'>View Repository</Text>
+            </Pressable>
+            <Pressable 
+                style={{...styles.button, backgroundColor:'red'}}
+                onPress={() => deleteReview(reviewId)}
+            >
+                <Text color='white' fontWeight='bold'>Delete Review</Text>
+            </Pressable>
+        </View>
+    )
+}
+
+
 const ReviewInfo = (props) => {
     return(
         <View style={styles.infoContainer}>
-            <Text fontWeight='bold'>{props.username}</Text>
+            <Text fontWeight='bold'>{props.heading}</Text>
             <Text>{formatDate(props.date)}</Text>
             <View style={styles.reviewTextContainer}><Text>{props.text}</Text></View>
         </View>

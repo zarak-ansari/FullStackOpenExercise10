@@ -18,11 +18,25 @@ mutation ($username: String!, $password: String!){
 }
 `
 
-export const GET_USERNAME = gql`
-query Username {
+export const GET_USER = gql`
+query Username ($includeReviews: Boolean = false) {
   me {
     id
     username
+    reviews @include(if: $includeReviews) {
+      edges{
+        node {
+          repository {
+            fullName
+            id
+          }
+          rating
+          text
+          createdAt
+          id
+        }
+      }
+    }
   }
 }
 `
@@ -72,5 +86,11 @@ mutation Mutation($user: CreateUserInput) {
     id
     username
   }
+}
+`
+
+export const DELETE_REVIEW = gql`
+mutation Mutation($deleteReviewId: ID!) {
+  deleteReview(id: $deleteReviewId)
 }
 `
