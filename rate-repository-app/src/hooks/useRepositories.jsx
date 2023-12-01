@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client';
 import { GET_ALL_REPOSITORIES } from '../graphql/queries';
 
-const useRepositories = (sortingOption) => {
+const useRepositories = (sortingOption, searchKeyword) => {
 
     const { data, error, loading } = useQuery(GET_ALL_REPOSITORIES,{
         // sortingOption can either be 'latest', 'lowestRated' or 'highestRated' 
         // might break if other values are allowed for sortingOption
         variables:{
+            searchKeyword: searchKeyword ? searchKeyword : '',
             orderBy: sortingOption !== 'latest' ? 'RATING_AVERAGE': 'CREATED_AT', 
             orderDirection: sortingOption === 'lowestRated' ? 'ASC' : 'DESC'
         },
