@@ -6,7 +6,7 @@ import ReviewItem from "./SingleRepository/ReviewItem"
 
 const UserReviews = () => {
 
-    const { data, error, loading } = useQuery(GET_USER, {variables:{includeReviews:true}})
+    const { data, error, loading } = useQuery(GET_USER, {variables:{includeReviews:true}, fetchPolicy: 'cache-and-network',})
 
     if(error) return error
     if(loading) return <Text>Loading...</Text>

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable } from "react-native"
+import { StyleSheet, View, Pressable, Alert } from "react-native"
 import { format, parseISO } from "date-fns"
 import Text from "../Text"
 import theme from "../../themes"
@@ -76,7 +76,7 @@ const Buttons = ({ repositoryId, reviewId }) => {
             </Pressable>
             <Pressable 
                 style={{...styles.button, backgroundColor:'red'}}
-                onPress={() => deleteReview(reviewId)}
+                onPress={() => handleDeleteReview(deleteReview,reviewId)}
             >
                 <Text color='white' fontWeight='bold'>Delete Review</Text>
             </Pressable>
@@ -84,6 +84,23 @@ const Buttons = ({ repositoryId, reviewId }) => {
     )
 }
 
+const handleDeleteReview = (deleteReview, reviewId) => {
+    Alert.alert(
+        'Delete Review',
+        'Are you sure you want to delete this review?',
+        [
+            {
+                text: 'Cancel',
+                onPress: () => console.log('deletion cancelled'),
+                style: 'cancel'
+            },
+            {
+                text: 'Confirm',
+                onPress: () => deleteReview(reviewId),
+            }
+        ]
+    )
+}
 
 const ReviewInfo = (props) => {
     return(
