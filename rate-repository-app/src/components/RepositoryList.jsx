@@ -13,6 +13,19 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+const SortingOptionPicker = ({sortingOption, setSortingOption}) => {
+    return(
+        <Picker
+            style={{padding:10, backgroundColor:'white'}}
+            selectedValue={sortingOption}
+            onValueChange={(itemValue) => setSortingOption(itemValue)}
+        >
+            <Picker.Item label="Latest Repositories" value="latest" />
+            <Picker.Item label="Highest Rated Repositories" value="highestRated" />
+            <Picker.Item label="Lowest Rated Repositories" value="lowestRated" />
+        </Picker>
+    )
+}
 
 export const RepositoryListContainer = ({ repositories, sortingOption, setSortingOption }) => {
     
@@ -20,27 +33,11 @@ export const RepositoryListContainer = ({ repositories, sortingOption, setSortin
     
     const navigate = useNavigate()
 
-    
-    const SortingOptionPicker = () => {
-        return(
-            <Picker
-                style={{padding:10, backgroundColor:'white'}}
-                selectedValue={sortingOption}
-                onValueChange={(itemValue) => setSortingOption(itemValue)
-                }>
-            <Picker.Item label="Latest Repositories" value="latest" />
-            <Picker.Item label="Highest Rated Repositories" value="highestRated" />
-            <Picker.Item label="Lowest Rated Repositories" value="lowestRated" />
-          </Picker>
-        )
-    }
-    
-
     return (
         <FlatList
             data={repositoryNodes}
             ItemSeparatorComponent={ItemSeparator}
-            ListHeaderComponent={SortingOptionPicker}
+            ListHeaderComponent={<SortingOptionPicker sortingOption={sortingOption} setSortingOption={setSortingOption}/>}
             renderItem={({ item }) => <Pressable onPress={() => navigate(`/repository/${item.id}`)}><RepositoryItem key={item.id} repository={item} /></Pressable>}
         />
     );    
